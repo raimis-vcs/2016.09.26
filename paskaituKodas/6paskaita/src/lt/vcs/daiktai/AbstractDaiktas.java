@@ -32,6 +32,6 @@ public abstract class AbstractDaiktas implements Daiktas, VcsEntity {
     @Override
     public String getId(){
         SimpleDateFormat spf = new SimpleDateFormat("'['ss']['mm']['HH']'");
-        return name + "-" +spf.format(purchaseDate);
+        return name + "-" + spf.format(purchaseDate);
     }
 }
