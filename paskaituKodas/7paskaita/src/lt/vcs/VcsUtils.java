@@ -1,5 +1,7 @@
 package lt.vcs;
 
+import java.io.*;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -9,11 +11,15 @@ import java.util.Scanner;
  */
 public class VcsUtils {
 
+    public static final Charset UTF_8 = Charset.forName("UTF-8");
+    public static final String NEW_LINE = System.lineSeparator();
+
     /**
      * grazina nauja Scanner instanca
      * @return
      */
     private static Scanner newScanner(){
+
         return new Scanner(System.in);
     }
 
@@ -49,6 +55,30 @@ public class VcsUtils {
      */
     public static int inputInt() {
         return newScanner().nextInt();
+    }
+
+    /**
+     * Metodas failo readeriui gauti
+     * @param file failo pavadinimas su keliu iki jo (path)
+     * @return readeri failui
+     * @throws IOException gali mesti exceptiona
+     */
+    public static BufferedReader newReader(String file) throws IOException {
+        FileInputStream fis = new FileInputStream(file);
+        InputStreamReader isr = new InputStreamReader(fis, VcsUtils.UTF_8);
+        return new BufferedReader(isr);
+    }
+
+    /**
+     * Metodas failo writeriui gauti
+     * @param file failo pavadinimas su keliu iki jo (path)
+     * @return writer failui
+     * @throws IOException gali mesti exceptiona
+     */
+    public static BufferedWriter newWriter(String file) throws IOException {
+        FileOutputStream fos = new FileOutputStream(file);
+        OutputStreamWriter osw = new OutputStreamWriter(fos);
+        return new BufferedWriter(osw);
     }
 
 }
