@@ -41,7 +41,7 @@ public class GameUtils {
      * Nustato kuris is zaideju laimejo
      * @param p1
      * @param p2
-     * @return zaideja kurisl iamejo
+     * @return zaideja kurisl iamejo, jei lygiosios grazina null
      */
     public static Player kasLaimejo(Player p1, Player p2) {
         Player winner = null;
@@ -54,20 +54,54 @@ public class GameUtils {
         } else {
             switch (p1h.getCombination()) {
                 case KIND5:
-                    break;
                 case KIND4:
+                case KIND3:
+                case PAIR:
+                    if (p1h.getHighestComboNumber() != p2h.getHighestComboNumber()) {
+                        if (p1h.getHighestComboNumber() > p2h.getHighestComboNumber()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    } else if (p1h.getDiceSum() != p2h.getDiceSum()) {
+                        if (p1h.getDiceSum() > p2h.getDiceSum()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    }
                     break;
                 case FULL_HOUSE:
+                case PAIR2:
+                    if (p1h.getHighestComboNumber() != p2h.getHighestComboNumber()) {
+                        if (p1h.getHighestComboNumber() > p2h.getHighestComboNumber()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    } else if (p1h.getSecondHighestComboNumber() != p2h.getSecondHighestComboNumber()) {
+                        if (p1h.getSecondHighestComboNumber() > p2h.getSecondHighestComboNumber()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    } else if (p1h.getDiceSum() != p2h.getDiceSum()) {
+                        if (p1h.getDiceSum() > p2h.getDiceSum()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    }
                     break;
                 case STRAIGHT:
-                    break;
-                case KIND3:
-                    break;
-                case PAIR2:
-                    break;
-                case PAIR:
-                    break;
                 case NONE:
+                    if (p1h.getDiceSum() != p2h.getDiceSum()) {
+                        if (p1h.getDiceSum() > p2h.getDiceSum()) {
+                            winner = p1;
+                        } else {
+                            winner = p2;
+                        }
+                    }
                     break;
             }
         }
